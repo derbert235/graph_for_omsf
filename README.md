@@ -1,6 +1,10 @@
 Graph for Open-Meteo Solar Forecast
 (Diagramm für Open-Meteo Solar Forecast)
 
+Hier findet Ihr das Projekt Open-Meteo Solar Forecast:
+https://github.com/rany2/open-meteo-solar-forecast
+
+
 ![image](https://github.com/user-attachments/assets/de8f5e16-8764-4003-9ed9-504e45ad16e8)
 
 
