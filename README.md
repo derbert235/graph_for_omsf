@@ -4,11 +4,13 @@ Graph for Open-Meteo Solar Forecast
 ![image](https://github.com/user-attachments/assets/de8f5e16-8764-4003-9ed9-504e45ad16e8)
 
 
-
 Wichtig!!!!!
 
 Die Konfikurtions über Home Assiastant funktioniert noch nicht,
 bisher nur manuell in der Sensor.py!
+
+![image](https://github.com/user-attachments/assets/b6433add-4c53-4e2d-b4b0-207ce00292ac)
+
 
 
 Name - Beispiel: Graph for Open-Meteo Solar Forecast
