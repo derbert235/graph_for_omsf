@@ -1,11 +1,10 @@
-# graph_for_omsf
+Graph for Open-Meteo Solar Forecast
+(Diagramm für Open-Meteo Solar Forecast)
 
-https://community.simon42.com/uploads/default/original/3X/d/4/d40907cd9a56da0217003a5e5c7e44a9f38917e8.png![image](https://github.com/user-attachments/assets/b4f3d7c5-087c-4a62-a8f5-f9367715294c)
+Wichtig!!!!!
 
-
-Die Konfikurtions möglichkeit funktioniert noch nicht, bisher nur manuell inder Sensor.py:
-
-
+Die Konfikurtions über Home Assiastant funktioniert noch nicht,
+bisher nur manuell in der Sensor.py!
 
 
 Name - Beispiel: Graph for Open-Meteo Solar Forecast
