@@ -1,0 +1,412 @@
+type: custom:plotly-graph
+title: Forecast PV-Energy
+view_layout:
+  grid-area: solar
+hours_to_show: 4.8d
+time_offset: 3.3d
+refresh_interval: true
+entities:
+  - entity: sensor.pv_p8_erzeugung_gesamt_kwh
+    name: Solar Power
+    line:
+      color: rgb(255, 155, 48)
+      shape: spline
+      width: 1
+    fill: tozeroy
+    fillcolor: rgba(255, 155, 48, 0.3)
+    yaxis: y1
+    show_value: true
+    showlegend: true
+    unit_of_measurement: kWh
+  - entity: sensor.sn_3015637446_battery_soc_total
+    name: Battery SOC
+    line:
+      color: red
+      shape: line
+      width: 1
+    fillcolor: rgba(255,0,0, 0.3)
+    yaxis: y3
+    show_value: true
+    showlegend: true
+    unit_of_measurement: "%"
+  - entity: sensor.energy_current_hour_p8
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempa
+  - entity: sensor.energy_next_hour_p8
+    time_offset: 1h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempb
+  - entity: sensor.energy_2h_p8
+    time_offset: 2h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempbb
+  - entity: sensor.energy_3h_p8
+    time_offset: 3h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempcc
+  - entity: sensor.energy_03h_p8
+    time_offset: 3h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempc
+  - entity: sensor.energy_4h_p8
+    time_offset: 4h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempdd
+  - entity: sensor.energy_06h_p8
+    time_offset: 6h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempd
+  - entity: sensor.energy_6h_p8
+    time_offset: 6h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempee
+  - entity: sensor.energy_09h_p8
+    time_offset: 9h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempe
+  - entity: sensor.energy_12h_p8
+    time_offset: 12h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempf
+  - entity: sensor.energy_15h_p8
+    time_offset: 15h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempg
+  - entity: sensor.energy_18h_p8
+    time_offset: 18h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: temph
+  - entity: sensor.energy_21h_p8
+    time_offset: 21h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempi
+  - entity: sensor.energy_24h_p8
+    time_offset: 24h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempj
+  - entity: sensor.energy_27h_p8
+    time_offset: 27h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempk
+  - entity: sensor.energy_30h_p8
+    time_offset: 30h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: templ
+  - entity: sensor.energy_33h_p8
+    time_offset: 33h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempm
+  - entity: sensor.energy_36h_p8
+    time_offset: 36h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempn
+  - entity: sensor.energy_39h_p8
+    time_offset: 39h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempo
+  - entity: sensor.energy_42h_p8
+    time_offset: 42h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempp
+  - entity: sensor.energy_45h_p8
+    time_offset: 45h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempq
+  - entity: sensor.energy_48h_p8
+    time_offset: 48h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempr
+  - entity: sensor.energy_51h_p8
+    time_offset: 51h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: temps
+  - entity: sensor.energy_54h_p8
+    time_offset: 54h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempt
+  - entity: sensor.energy_57h_p8
+    time_offset: 57h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempu
+  - entity: sensor.energy_60h_p8
+    time_offset: 60h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempv
+  - entity: sensor.energy_63h_p8
+    time_offset: 63h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempw
+  - entity: sensor.energy_66h_p8
+    time_offset: 66h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempx
+  - entity: sensor.energy_69h_p8
+    time_offset: 69h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempy
+  - entity: sensor.energy_72h_p8
+    time_offset: 72h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempz
+  - entity: sensor.energy_75h_p8
+    time_offset: 75h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempaaa
+  - entity: sensor.energy_78h_p8
+    time_offset: 78h
+    filters:
+      - map_y: ys[ys.length-1]
+      - map_x: xs[xs.length-1]
+      - store_var: tempbbb
+  - entity: ""
+    line:
+      width: 2
+      color: darkgray
+      shape: spline
+    fill: black
+    yaxis: y1
+    show_value: false
+    showlegend: false
+    filters:
+      - fn: >-
+          ({vars}) =>  ({ xs: [vars.tempa.xs[0], vars.tempb.xs[0],
+          vars.tempbb.xs[0], vars.tempcc.xs[0], vars.tempdd.xs[0],
+          vars.tempee.xs[0], vars.tempe.xs[0], vars.tempf.xs[0],
+          vars.tempg.xs[0], vars.temph.xs[0], vars.tempi.xs[0],
+          vars.tempj.xs[0], vars.tempk.xs[0], vars.templ.xs[0],
+          vars.tempm.xs[0], vars.tempn.xs[0], vars.tempo.xs[0],
+          vars.tempp.xs[0], vars.tempq.xs[0], vars.tempr.xs[0],
+          vars.temps.xs[0], vars.tempt.xs[0], vars.tempu.xs[0],
+          vars.tempv.xs[0], vars.tempw.xs[0], vars.tempx.xs[0],
+          vars.tempy.xs[0], vars.tempz.xs[0], vars.tempaaa.xs[0],
+          vars.tempbbb.xs[0]], ys: [vars.tempa.ys[0], vars.tempb.ys[0],
+          vars.tempbb.ys[0], vars.tempcc.ys[0], vars.tempdd.ys[0],
+          vars.tempee.ys[0], vars.tempe.ys[0], vars.tempf.ys[0],
+          vars.tempg.ys[0], vars.temph.ys[0], vars.tempi.ys[0],
+          vars.tempj.ys[0], vars.tempk.ys[0], vars.templ.ys[0],
+          vars.tempm.ys[0], vars.tempn.ys[0], vars.tempo.ys[0],
+          vars.tempp.ys[0], vars.tempq.ys[0], vars.tempr.ys[0],
+          vars.temps.ys[0], vars.tempt.ys[0], vars.tempu.ys[0],
+          vars.tempv.ys[0], vars.tempw.ys[0], vars.tempx.ys[0],
+          vars.tempy.ys[0], vars.tempz.ys[0], vars.tempaaa.ys[0],
+          vars.tempbbb.ys[0]] })
+      - sliding_window_moving_average:
+          window_size: 1
+          extended: true
+      - sliding_window_moving_average:
+          window_size: 2
+          extended: true
+      - sliding_window_moving_average:
+          window_size: 2
+          extended: true
+  - entity: ""
+    line:
+      width: 1
+      color: green
+      shape: spline
+    fill: black
+    yaxis: y1
+    show_value: false
+    showlegend: false
+    filters:
+      - fn: >-
+          ({vars}) =>  ({ xs: [vars.tempa.xs[0], vars.tempb.xs[0],
+          vars.tempc.xs[0], vars.tempd.xs[0], vars.tempe.xs[0],
+          vars.tempf.xs[0], vars.tempg.xs[0], vars.temph.xs[0],
+          vars.tempi.xs[0], vars.tempj.xs[0], vars.tempk.xs[0],
+          vars.templ.xs[0], vars.tempm.xs[0], vars.tempn.xs[0],
+          vars.tempo.xs[0], vars.tempp.xs[0], vars.tempq.xs[0],
+          vars.tempr.xs[0], vars.temps.xs[0], vars.tempt.xs[0],
+          vars.tempu.xs[0], vars.tempv.xs[0], vars.tempw.xs[0],
+          vars.tempx.xs[0], vars.tempy.xs[0], vars.tempz.xs[0],
+          vars.tempaaa.xs[0], vars.tempbbb.xs[0]], ys: [vars.tempa.ys[0],
+          vars.tempb.ys[0], vars.tempc.ys[0], vars.tempd.ys[0],
+          vars.tempe.ys[0], vars.tempf.ys[0], vars.tempg.ys[0],
+          vars.temph.ys[0], vars.tempi.ys[0], vars.tempj.ys[0],
+          vars.tempk.ys[0], vars.templ.ys[0], vars.tempm.ys[0],
+          vars.tempn.ys[0], vars.tempo.ys[0], vars.tempp.ys[0],
+          vars.tempq.ys[0], vars.tempr.ys[0], vars.temps.ys[0],
+          vars.tempt.ys[0], vars.tempu.ys[0], vars.tempv.ys[0],
+          vars.tempw.ys[0], vars.tempx.ys[0], vars.tempy.ys[0],
+          vars.tempz.ys[0], vars.tempaaa.ys[0], vars.tempbbb.ys[0]] })
+      - sliding_window_moving_average:
+          window_size: 1
+          extended: true
+      - sliding_window_moving_average:
+          window_size: 2
+          extended: true
+      - sliding_window_moving_average:
+          window_size: 1
+          extended: true
+  - entity: ""
+    name: ""
+    yaxis: y9
+    show_value: true
+    showlegend: false
+    unit_of_measurement: Jetzt
+    line:
+      width: 2
+      dash: dot
+      color: dodgerblue
+    x: $ex [Date.now(), Date.now()]
+    "y":
+      - 0
+      - 1
+defaults:
+  yaxes:
+    fixedrange: true
+layout:
+  height: 390
+  margin:
+    t: 55
+    l: 50
+  showlegend: false
+  legend:
+    x: 0
+    "y": 0
+  yaxis2:
+    range:
+      - -5
+      - 105
+    fixedrange: true
+  annotations:
+    - text: |-
+        $fn ({hass}) =>
+          "<span style='font-size: 24px;'><span style='color: orange'>"
+          + Number(hass.states['sensor.energy_production_today_p8'].state).toFixed(1) + "</span></span>kWh<br>"
+          +  "</span><span style=''>Heute</span><br>"
+      xref: x domain
+      yref: y domain
+      xanchor: center
+      yanchor: center
+      x: 0.06
+      "y": 1.15
+      showarrow: false
+    - text: |-
+        $fn ({hass}) =>
+          "<span style='font-size: 24px;'><span style='color: dodgerblue'>"
+          + Number(hass.states['sensor.energy_production_today_remaining_p8'].state).toFixed(1) + "</span></span>kWh<br>"
+          +  "</span><span style=''>Heute noch erwartet</span><br>"
+      xref: x domain
+      yref: y domain
+      xanchor: center
+      yanchor: center
+      x: 0.42
+      "y": 1.15
+      showarrow: false
+    - text: |-
+        $fn ({hass}) =>
+          "<span style='font-size: 24px;'><span style='color: darkgray'>"
+          + Number(hass.states['sensor.energy_production_tomorrow_p8'].state).toFixed(1) + "</span></span>kWh<br>"
+          +  "</span><span style=''>Morgen</span><br>"
+      xref: x domain
+      yref: y domain
+      xanchor: center
+      yanchor: centre
+      x: 0.58
+      "y": 1.15
+      showarrow: false
+    - text: |-
+        $fn ({hass}) =>
+          "<span style='font-size: 24px;'><span style='color: darkgray'>"
+          + Number(hass.states['sensor.energy_production_d2_p8'].state).toFixed(1) + "</span></span>kWh<br>"
+          +  "</span><span style=''>Übermorgen</span><br>"
+      xref: x domain
+      yref: y domain
+      xanchor: center
+      yanchor: center
+      x: 0.77
+      "y": 1.15
+      showarrow: false
+    - text: |-
+        $fn ({hass}) =>
+          "<span style='font-size: 24px;'><span style='color: darkgray'>"
+          + Number(hass.states['sensor.energy_production_d3_p8'].state).toFixed(1) + "</span></span>kWh<br>"
+          +  "</span><span style=''>In drei Tagen</span><br>"
+      xref: x domain
+      yref: y domain
+      xanchor: center
+      yanchor: center
+      x: 0.94
+      "y": 1.15
+      showarrow: false
+    - text: |-
+        $fn ({hass}) =>
+          "<span style='font-size: 24px;'><span style='color: red'>"
+          + Number(hass.states['sensor.sn_3015637446_battery_soc_total'].state) + "</span></span>%<br>"
+          +  "</span><span style=''>SOC (Akku)</span><br>"
+      xref: x domain
+      yref: y domain
+      xanchor: center
+      yanchor: center
+      x: 0.23
+      "y": 1.15
+      showarrow: false
+      show_value: true
+      texttemplate: "%{y}"
+config:
+  scrollZoom: false
+layout_options:
+  grid_columns: 12
