@@ -1,14 +1,11 @@
-DOMAIN = "graph_for_omsf_beta"
-
-DEFAULT_NAME = "Graph for Open-Meteo Solar Forecast - Beta"
-# Bis zu 5 Peak-Time-Sensoren
-CONF_PEAKTIME_SENSORS = "peaktime_sensors"
-
-# Sun-Entitäten
-CONF_SUN_RISING = "sun_rising"
-CONF_SUN_SETTING = "sun_setting"
-
-# Energy reduzierter Wert
-CONF_ENERGY_REDUZIERT = "energy_reduziert"
-DEFAULT_ENERGY_REDUZIERT = 0.6
-
+{
+    "domain": "graph_for_omsf",
+    "name": "Graph for Open-Meteo Solar Forecast",
+    "version": "0.8.0",
+    "documentation": "https://github.com/DerBERT/solar_forecast_db",
+    "requirements": [],
+    "dependencies": [],
+    "codeowners": ["@DerBERT"],
+    "config_flow": true
+  }
+  

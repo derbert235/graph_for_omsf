@@ -1,6 +1,6 @@
-DOMAIN = "graph_for_omsf_beta"
+DOMAIN = "graph_for_omsf"
 
-DEFAULT_NAME = "Graph for Open-Meteo Solar Forecast - Beta"
+DEFAULT_NAME = "Graph for Open-Meteo Solar Forecast"
 # Bis zu 5 Peak-Time-Sensoren
 CONF_PEAKTIME_SENSORS = "peaktime_sensors"
 

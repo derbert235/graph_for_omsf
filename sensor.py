@@ -115,7 +115,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
     #
     # (3) Time-Diff-Klassen (01h..24h) + Extra 1..4
     #
-
+    sensors.append(SfdbEnergyTimedif01hSensor(hass))
     sensors.append(SfdbEnergyTimedif02hSensor(hass))
     sensors.append(SfdbEnergyTimedif03hSensor(hass))
     sensors.append(SfdbEnergyTimedif04hSensor(hass))
@@ -126,6 +126,22 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
     sensors.append(SfdbEnergyTimedif18hSensor(hass))
     sensors.append(SfdbEnergyTimedif21hSensor(hass))
     sensors.append(SfdbEnergyTimedif24hSensor(hass))
+    sensors.append(SfdbEnergyTimedif27hSensor(hass))
+    sensors.append(SfdbEnergyTimedif30hSensor(hass))
+    sensors.append(SfdbEnergyTimedif33hSensor(hass))
+    sensors.append(SfdbEnergyTimedif36hSensor(hass))
+    sensors.append(SfdbEnergyTimedif39hSensor(hass))
+    sensors.append(SfdbEnergyTimedif42hSensor(hass))
+    sensors.append(SfdbEnergyTimedif45hSensor(hass))
+    sensors.append(SfdbEnergyTimedif48hSensor(hass))
+    sensors.append(SfdbEnergyTimedif51hSensor(hass))
+    sensors.append(SfdbEnergyTimedif54hSensor(hass))
+    sensors.append(SfdbEnergyTimedif57hSensor(hass))
+    sensors.append(SfdbEnergyTimedif60hSensor(hass))
+    sensors.append(SfdbEnergyTimedif63hSensor(hass))
+    sensors.append(SfdbEnergyTimedif66hSensor(hass))
+    sensors.append(SfdbEnergyTimedif69hSensor(hass))
+    sensors.append(SfdbEnergyTimedif72hSensor(hass))
 
     sensors.append(SfdbEnergyTimedif1Sensor(hass))
     sensors.append(SfdbEnergyTimedif2Sensor(hass))
@@ -151,6 +167,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
     # (6) Production SUM
     #
 
+
     sensors.append(SfdbEnergyProductionNextHourSensor(hass))
     sensors.append(SfdbEnergyProductionCurrentHourSensor(hass))
     sensors.append(SfdbEnergyProductionTodayRemainingSensor(hass))
@@ -165,27 +182,26 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
     #    Ersetzt die alten SfdbEnergyXXhSUMZSensor & SfdbEnergyXXhSUMSensor
     #
 
-    sensors.append(SfdbEnergyForecastSensor02hToday(hass))
-    sensors.append(SfdbEnergyForecastSensor03hToday(hass))
-    sensors.append(SfdbEnergyForecastSensor04hToday(hass))
-    sensors.append(SfdbEnergyForecastSensor06hToday(hass))
-    sensors.append(SfdbEnergyForecastSensor09hToday(hass))
-    sensors.append(SfdbEnergyForecastSensor12hToday(hass))
 
+    forecast_hourstoday = [2,3,4,6,9,12]
+    for hourtoday in forecast_hourstoday:
+        # Z-Variante
+        sensors.append(SfdbEnergyForecastSensorToday(hass, hourtoday, True))
+        # SUM-Variante
+        sensors.append(SfdbEnergyForecastSensorToday(hass, hourtoday, False))
 
     #
     # (7b) Forecast => EINE parametrisierte Klasse tomorrow
     #    Ersetzt die alten SfdbEnergyXXhSUMZSensor & SfdbEnergyXXhSUMSensor
     #
 
-    sensors.append(SfdbEnergyForecastSensor15hTomorrow(hass))
-    sensors.append(SfdbEnergyForecastSensor18hTomorrow(hass))
-    sensors.append(SfdbEnergyForecastSensor21hTomorrow(hass))
-    sensors.append(SfdbEnergyForecastSensor24hTomorrow(hass))
-    sensors.append(SfdbEnergyForecastSensor27hTomorrow(hass))
-    sensors.append(SfdbEnergyForecastSensor30hTomorrow(hass))
-    sensors.append(SfdbEnergyForecastSensor33hTomorrow(hass))
-    sensors.append(SfdbEnergyForecastSensor36hTomorrow(hass))
+
+    forecast_hourstomorrow = [15,18,21,24,27,30,33,36]
+    for hourtomorrow in forecast_hourstomorrow:
+        # Z-Variante
+        sensors.append(SfdbEnergyForecastSensorTomorrow(hass, hourtomorrow, True))
+        # SUM-Variante
+        sensors.append(SfdbEnergyForecastSensorTomorrow(hass, hourtomorrow, False))
 
 
     #
@@ -193,14 +209,12 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
     #    Ersetzt die alten SfdbEnergyXXhSUMZSensor & SfdbEnergyXXhSUMSensor
     #
 
-    sensors.append(SfdbEnergyForecastSensor39hD2(hass))
-    sensors.append(SfdbEnergyForecastSensor42hD2(hass))
-    sensors.append(SfdbEnergyForecastSensor45hD2(hass))
-    sensors.append(SfdbEnergyForecastSensor48hD2(hass))
-    sensors.append(SfdbEnergyForecastSensor51hD2(hass))
-    sensors.append(SfdbEnergyForecastSensor54hD2(hass))
-    sensors.append(SfdbEnergyForecastSensor57hD2(hass))
-    sensors.append(SfdbEnergyForecastSensor60hD2(hass))
+    forecast_hoursd2 = [39,42,45,48,51,54,57,60]
+    for hourd2 in forecast_hoursd2:
+        # Z-Variante
+        sensors.append(SfdbEnergyForecastSensorD2(hass, hourd2, True))
+        # SUM-Variante
+        sensors.append(SfdbEnergyForecastSensorD2(hass, hourd2, False))
 
 
     #
@@ -208,14 +222,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
     #    Ersetzt die alten SfdbEnergyXXhSUMZSensor & SfdbEnergyXXhSUMSensor
     #
 
-    sensors.append(SfdbEnergyForecastSensor63hD3(hass))
-    sensors.append(SfdbEnergyForecastSensor66hD3(hass))
-    sensors.append(SfdbEnergyForecastSensor69hD3(hass))
-    sensors.append(SfdbEnergyForecastSensor72hD3(hass))
-    sensors.append(SfdbEnergyForecastSensor75hD3(hass))
-    sensors.append(SfdbEnergyForecastSensor78hD3(hass))
-    sensors.append(SfdbEnergyForecastSensor81hD3(hass))
-    sensors.append(SfdbEnergyForecastSensor84hD3(hass))
+
+    forecast_hoursd3 = [63,66,69,72,75,78]
+    for hourd3 in forecast_hoursd3:
+        # Z-Variante
+        sensors.append(SfdbEnergyForecastSensorD3(hass, hourd3, True))
+        # SUM-Variante
+        sensors.append(SfdbEnergyForecastSensorD3(hass, hourd3, False))
 
 
     #
@@ -352,7 +365,7 @@ class SfdbPowerHighestPeakTimeTodaySUMDifSensor(Entity):
     async def async_update(self):
         now_ts = now_timestamp()
         total = 0
-        for hour in ["", 2, 3, 4, 5]:
+        for hour in [6, 7, 8, 9, 10]:
             ent = f"sensor.power_highest_peak_time_today_{hour}"
             ts = timestamp_state(self.hass, ent)
             if ts is not None:
@@ -365,6 +378,7 @@ class SfdbPowerHighestPeakTimeTodaySUMDifSensor(Entity):
         # Durchschnitt (durch 5) und round auf 1 Nachkommastelle
         avg = total / 5.0
         self._state = round(avg, 1)
+
 
 
 class SfdbPowerHighestPeakTimeTodaySUMSensor(Entity):
@@ -384,7 +398,7 @@ class SfdbPowerHighestPeakTimeTodaySUMSensor(Entity):
     async def async_update(self):
         total = 0
         count = 0
-        for hour in ["", 2, 3, 4, 5]:
+        for hour in [6, 7, 8, 9, 10]:
             ts = timestamp_state(self.hass, f"sensor.power_highest_peak_time_today_{hour}")
             if ts is not None:
                 hours_int = int(ts / 3600)
@@ -435,7 +449,7 @@ class SfdbPowerHighestPeakTimeTomorrowSUMDifSensor(Entity):
     async def async_update(self):
         now_ts = now_timestamp()
         total = 0
-        for hour in ["", 2, 3, 4, 5]:
+        for hour in [3, 6, 9, 12, 15, 18 ,21, 24]:
             ent = f"sensor.power_highest_peak_time_tomorrow_{hour}"
             ts = timestamp_state(self.hass, ent)
             if ts is not None:
@@ -462,7 +476,7 @@ class SfdbPowerHighestPeakTimeTomorrowSUMSensor(Entity):
     async def async_update(self):
         total = 0
         count = 0
-        for hour in ["", 2, 3, 4, 5]:
+        for hour in [3, 6, 9, 12, 15, 18 ,21, 24]:
             ts = timestamp_state(self.hass, f"sensor.power_highest_peak_time_tomorrow_{hour}")
             if ts is not None:
                 total += int(ts / 3600)
@@ -513,6 +527,8 @@ class SfdbPowerSunRisingTimeTodaySUMSensor(Entity):
         ts = timestamp_state(self.hass, "sensor.sun_next_rising") or 0.0
         val = int(ts / 3600)
         self._state = round(val, 1)
+
+
 
 
 
@@ -658,10 +674,29 @@ class SfdbPowerSunSettingTimeTodaySUMDifSensor(Entity):
         self._state = round(val, 1)
 
 
+
+
+
 # ------------------------------------------------------------------------------
 # (3) TIME-DIFF-KLASSEN (01h..24h) + Extra 1..4
 # ------------------------------------------------------------------------------
-
+class SfdbEnergyTimedif01hSensor(Entity):
+    def __init__(self, hass):
+        self.hass = hass
+        self._attr_name = "sfdb_energy_timedif_01h"
+        self._state = None
+    @property
+    def name(self):
+        return self._attr_name
+    @property
+    def state(self):
+        return self._state
+    async def async_update(self):
+        day_val = float_state(self.hass, "sensor.sfdb_power_highest_peak_time_today_sum_day")
+        base = day_val - 1
+        if base < 0:
+            base += 24
+        self._state = round(base, 2)
 
 class SfdbEnergyTimedif02hSensor(Entity):
     def __init__(self, hass):
@@ -841,6 +876,330 @@ class SfdbEnergyTimedif24hSensor(Entity):
         base = day_val - 24
         if base < 0:
             base += 24
+        self._state = round(base, 2)
+
+class SfdbEnergyTimedif27hSensor(Entity):
+    def __init__(self, hass):
+        self.hass = hass
+        self._attr_name = "sfdb_energy_timedif_27h"
+        self._state = None
+    @property
+    def name(self):
+        return self._attr_name
+    @property
+    def state(self):
+        return self._state
+    async def async_update(self):
+        day_val = float_state(self.hass, "sensor.sfdb_power_highest_peak_time_today_sum_day")
+        base = day_val - 27
+        if base < 0:
+            base += 48
+        self._state = round(base, 2)
+
+class SfdbEnergyTimedif30hSensor(Entity):
+    def __init__(self, hass):
+        self.hass = hass
+        self._attr_name = "sfdb_energy_timedif_30h"
+        self._state = None
+    @property
+    def name(self):
+        return self._attr_name
+    @property
+    def state(self):
+        return self._state
+    async def async_update(self):
+        day_val = float_state(self.hass, "sensor.sfdb_power_highest_peak_time_today_sum_day")
+        base = day_val - 30
+        if base < 0:
+            base += 48
+        self._state = round(base, 2)
+
+class SfdbEnergyTimedif33hSensor(Entity):
+    def __init__(self, hass):
+        self.hass = hass
+        self._attr_name = "sfdb_energy_timedif_33h"
+        self._state = None
+    @property
+    def name(self):
+        return self._attr_name
+    @property
+    def state(self):
+        return self._state
+    async def async_update(self):
+        day_val = float_state(self.hass, "sensor.sfdb_power_highest_peak_time_today_sum_day")
+        base = day_val - 33
+        if base < 0:
+            base += 48
+        self._state = round(base, 2)
+
+class SfdbEnergyTimedif36hSensor(Entity):
+    def __init__(self, hass):
+        self.hass = hass
+        self._attr_name = "sfdb_energy_timedif_36h"
+        self._state = None
+    @property
+    def name(self):
+        return self._attr_name
+    @property
+    def state(self):
+        return self._state
+    async def async_update(self):
+        day_val = float_state(self.hass, "sensor.sfdb_power_highest_peak_time_today_sum_day")
+        base = day_val - 36
+        if base < 0:
+            base += 48
+        self._state = round(base, 2)
+
+class SfdbEnergyTimedif39hSensor(Entity):
+    def __init__(self, hass):
+        self.hass = hass
+        self._attr_name = "sfdb_energy_timedif_39h"
+        self._state = None
+    @property
+    def name(self):
+        return self._attr_name
+    @property
+    def state(self):
+        return self._state
+    async def async_update(self):
+        day_val = float_state(self.hass, "sensor.sfdb_power_highest_peak_time_today_sum_day")
+        base = day_val - 39
+        if base < 0:
+            base += 48
+        self._state = round(base, 2)
+
+class SfdbEnergyTimedif42hSensor(Entity):
+    def __init__(self, hass):
+        self.hass = hass
+        self._attr_name = "sfdb_energy_timedif_42h"
+        self._state = None
+    @property
+    def name(self):
+        return self._attr_name
+    @property
+    def state(self):
+        return self._state
+    async def async_update(self):
+        day_val = float_state(self.hass, "sensor.sfdb_power_highest_peak_time_today_sum_day")
+        base = day_val - 42
+        if base < 0:
+            base += 48
+        self._state = round(base, 2)
+
+class SfdbEnergyTimedif45hSensor(Entity):
+    def __init__(self, hass):
+        self.hass = hass
+        self._attr_name = "sfdb_energy_timedif_45h"
+        self._state = None
+    @property
+    def name(self):
+        return self._attr_name
+    @property
+    def state(self):
+        return self._state
+    async def async_update(self):
+        day_val = float_state(self.hass, "sensor.sfdb_power_highest_peak_time_today_sum_day")
+        base = day_val - 45
+        if base < 0:
+            base += 48
+        self._state = round(base, 2)
+
+class SfdbEnergyTimedif48hSensor(Entity):
+    def __init__(self, hass):
+        self.hass = hass
+        self._attr_name = "sfdb_energy_timedif_48h"
+        self._state = None
+    @property
+    def name(self):
+        return self._attr_name
+    @property
+    def state(self):
+        return self._state
+    async def async_update(self):
+        day_val = float_state(self.hass, "sensor.sfdb_power_highest_peak_time_today_sum_day")
+        base = day_val - 48
+        if base < 0:
+            base += 48
+        self._state = round(base, 2)
+
+class SfdbEnergyTimedif51hSensor(Entity):
+    def __init__(self, hass):
+        self.hass = hass
+        self._attr_name = "sfdb_energy_timedif_51h"
+        self._state = None
+    @property
+    def name(self):
+        return self._attr_name
+    @property
+    def state(self):
+        return self._state
+    async def async_update(self):
+        day_val = float_state(self.hass, "sensor.sfdb_power_highest_peak_time_today_sum_day")
+        base = day_val - 51
+        if base < 0:
+            base += 72
+        self._state = round(base, 2)
+
+class SfdbEnergyTimedif54hSensor(Entity):
+    def __init__(self, hass):
+        self.hass = hass
+        self._attr_name = "sfdb_energy_timedif_54h"
+        self._state = None
+    @property
+    def name(self):
+        return self._attr_name
+    @property
+    def state(self):
+        return self._state
+    async def async_update(self):
+        day_val = float_state(self.hass, "sensor.sfdb_power_highest_peak_time_today_sum_day")
+        base = day_val - 54
+        if base < 0:
+            base += 72
+        self._state = round(base, 2)
+
+class SfdbEnergyTimedif57hSensor(Entity):
+    def __init__(self, hass):
+        self.hass = hass
+        self._attr_name = "sfdb_energy_timedif_57h"
+        self._state = None
+    @property
+    def name(self):
+        return self._attr_name
+    @property
+    def state(self):
+        return self._state
+    async def async_update(self):
+        day_val = float_state(self.hass, "sensor.sfdb_power_highest_peak_time_today_sum_day")
+        base = day_val - 57
+        if base < 0:
+            base += 72
+        self._state = round(base, 2)
+
+class SfdbEnergyTimedif60hSensor(Entity):
+    def __init__(self, hass):
+        self.hass = hass
+        self._attr_name = "sfdb_energy_timedif_60h"
+        self._state = None
+    @property
+    def name(self):
+        return self._attr_name
+    @property
+    def state(self):
+        return self._state
+    async def async_update(self):
+        day_val = float_state(self.hass, "sensor.sfdb_power_highest_peak_time_today_sum_day")
+        base = day_val - 60
+        if base < 0:
+            base += 72
+        self._state = round(base, 2)
+
+class SfdbEnergyTimedif63hSensor(Entity):
+    def __init__(self, hass):
+        self.hass = hass
+        self._attr_name = "sfdb_energy_timedif_63h"
+        self._state = None
+    @property
+    def name(self):
+        return self._attr_name
+    @property
+    def state(self):
+        return self._state
+    async def async_update(self):
+        day_val = float_state(self.hass, "sensor.sfdb_power_highest_peak_time_today_sum_day")
+        base = day_val - 63
+        if base < 0:
+            base += 72
+        self._state = round(base, 2)
+
+class SfdbEnergyTimedif66hSensor(Entity):
+    def __init__(self, hass):
+        self.hass = hass
+        self._attr_name = "sfdb_energy_timedif_66h"
+        self._state = None
+    @property
+    def name(self):
+        return self._attr_name
+    @property
+    def state(self):
+        return self._state
+    async def async_update(self):
+        day_val = float_state(self.hass, "sensor.sfdb_power_highest_peak_time_today_sum_day")
+        base = day_val - 66
+        if base < 0:
+            base += 72
+        self._state = round(base, 2)
+
+class SfdbEnergyTimedif69hSensor(Entity):
+    def __init__(self, hass):
+        self.hass = hass
+        self._attr_name = "sfdb_energy_timedif_69h"
+        self._state = None
+    @property
+    def name(self):
+        return self._attr_name
+    @property
+    def state(self):
+        return self._state
+    async def async_update(self):
+        day_val = float_state(self.hass, "sensor.sfdb_power_highest_peak_time_today_sum_day")
+        base = day_val - 69
+        if base < 0:
+            base += 72
+        self._state = round(base, 2)
+
+class SfdbEnergyTimedif72hSensor(Entity):
+    def __init__(self, hass):
+        self.hass = hass
+        self._attr_name = "sfdb_energy_timedif_72h"
+        self._state = None
+    @property
+    def name(self):
+        return self._attr_name
+    @property
+    def state(self):
+        return self._state
+    async def async_update(self):
+        day_val = float_state(self.hass, "sensor.sfdb_power_highest_peak_time_today_sum_day")
+        base = day_val - 72
+        if base < 0:
+            base += 72
+        self._state = round(base, 2)
+
+class SfdbEnergyTimedif75hSensor(Entity):
+    def __init__(self, hass):
+        self.hass = hass
+        self._attr_name = "sfdb_energy_timedif_75h"
+        self._state = None
+    @property
+    def name(self):
+        return self._attr_name
+    @property
+    def state(self):
+        return self._state
+    async def async_update(self):
+        day_val = float_state(self.hass, "sensor.sfdb_power_highest_peak_time_today_sum_day")
+        base = day_val - 75
+        if base < 0:
+            base += 96
+        self._state = round(base, 2)
+
+class SfdbEnergyTimedif78hSensor(Entity):
+    def __init__(self, hass):
+        self.hass = hass
+        self._attr_name = "sfdb_energy_timedif_78h"
+        self._state = None
+    @property
+    def name(self):
+        return self._attr_name
+    @property
+    def state(self):
+        return self._state
+    async def async_update(self):
+        day_val = float_state(self.hass, "sensor.sfdb_power_highest_peak_time_today_sum_day")
+        base = day_val - 78
+        if base < 0:
+            base += 96
         self._state = round(base, 2)
 
 
@@ -1029,11 +1388,11 @@ class SfdbEnergyProductionCurrentHourSensor(Entity):
 
     async def async_update(self):
 
-        Sensor1 = float_state(self.hass, "sensor.energy_current_hour")
-        Sensor2 = float_state(self.hass, "sensor.energy_current_hour_2")
-        Sensor3 = float_state(self.hass, "sensor.energy_current_hour_3")
-        Sensor4 = float_state(self.hass, "sensor.energy_current_hour_4")
-        Sensor5 = float_state(self.hass, "sensor.energy_current_hour_5")
+        Sensor1 = float_state(self.hass, "sensor.energy_current_hour_6")
+        Sensor2 = float_state(self.hass, "sensor.energy_current_hour_7")
+        Sensor3 = float_state(self.hass, "sensor.energy_current_hour_8")
+        Sensor4 = float_state(self.hass, "sensor.energy_current_hour_9")
+        Sensor5 = float_state(self.hass, "sensor.energy_current_hour_10")
         base = Sensor1 + Sensor2 + Sensor3 + Sensor4 + Sensor5
         if base < 0:
             base = 0
@@ -1056,11 +1415,11 @@ class SfdbEnergyProductionNextHourSensor(Entity):
 
     async def async_update(self):
 
-        Sensor1 = float_state(self.hass, "sensor.energy_next_hour")
-        Sensor2 = float_state(self.hass, "sensor.energy_next_hour_2")
-        Sensor3 = float_state(self.hass, "sensor.energy_next_hour_3")
-        Sensor4 = float_state(self.hass, "sensor.energy_next_hour_4")
-        Sensor5 = float_state(self.hass, "sensor.energy_next_hour_5")
+        Sensor1 = float_state(self.hass, "sensor.energy_next_hour_6")
+        Sensor2 = float_state(self.hass, "sensor.energy_next_hour_7")
+        Sensor3 = float_state(self.hass, "sensor.energy_next_hour_8")
+        Sensor4 = float_state(self.hass, "sensor.energy_next_hour_9")
+        Sensor5 = float_state(self.hass, "sensor.energy_next_hour_10")
         base = Sensor1 + Sensor2 + Sensor3 + Sensor4 + Sensor5
         if base < 0:
             base = 0
@@ -1083,16 +1442,68 @@ class SfdbEnergyProductionTodayRemainingSensor(Entity):
 
     async def async_update(self):
 
-        Sensor1 = float_state(self.hass, "sensor.energy_production_today_remaining")
-        Sensor2 = float_state(self.hass, "sensor.energy_production_today_remaining_2")
-        Sensor3 = float_state(self.hass, "sensor.energy_production_today_remaining_3")
-        Sensor4 = float_state(self.hass, "sensor.energy_production_today_remaining_4")
-        Sensor5 = float_state(self.hass, "sensor.energy_production_today_remaining_5")
+        Sensor1 = float_state(self.hass, "sensor.energy_production_today_remaining_6")
+        Sensor2 = float_state(self.hass, "sensor.energy_production_today_remaining_7")
+        Sensor3 = float_state(self.hass, "sensor.energy_production_today_remaining_8")
+        Sensor4 = float_state(self.hass, "sensor.energy_production_today_remaining_9")
+        Sensor5 = float_state(self.hass, "sensor.energy_production_today_remaining_10")
         base = Sensor1 + Sensor2 + Sensor3 + Sensor4 + Sensor5
         if base < 0:
             base = 0
         self._state = round(base, 2)
 
+# sensor.energy_production_today_remaining_SUM
+
+class SfdbEnergyProductionTodayRemainingSensor(Entity):
+    def __init__(self, hass):
+        self.hass = hass
+        self._attr_name = "sfdb_energy_production_today_remaining_SUM"
+        self._state = None
+    @property
+    def name(self):
+        return self._attr_name
+    @property
+    def state(self):
+        return self._state
+
+    async def async_update(self):
+
+        Sensor1 = float_state(self.hass, "sensor.energy_production_today_remaining_6")
+        Sensor2 = float_state(self.hass, "sensor.energy_production_today_remaining_7")
+        Sensor3 = float_state(self.hass, "sensor.energy_production_today_remaining_8")
+        Sensor4 = float_state(self.hass, "sensor.energy_production_today_remaining_9")
+        Sensor5 = float_state(self.hass, "sensor.energy_production_today_remaining_10")
+        base = Sensor1 + Sensor2 + Sensor3 + Sensor4 + Sensor5
+        if base < 0:
+            base = 0
+        self._state = round(base, 2)
+
+
+# sensor.energy_production_today_remaining_SUM
+
+class SfdbEnergyProductionTodayRemainingSensor(Entity):
+    def __init__(self, hass):
+        self.hass = hass
+        self._attr_name = "sfdb_energy_production_today_remaining_SUM"
+        self._state = None
+    @property
+    def name(self):
+        return self._attr_name
+    @property
+    def state(self):
+        return self._state
+
+    async def async_update(self):
+
+        Sensor1 = float_state(self.hass, "sensor.energy_production_today_remaining_6")
+        Sensor2 = float_state(self.hass, "sensor.energy_production_today_remaining_7")
+        Sensor3 = float_state(self.hass, "sensor.energy_production_today_remaining_8")
+        Sensor4 = float_state(self.hass, "sensor.energy_production_today_remaining_9")
+        Sensor5 = float_state(self.hass, "sensor.energy_production_today_remaining_10")
+        base = Sensor1 + Sensor2 + Sensor3 + Sensor4 + Sensor5
+        if base < 0:
+            base = 0
+        self._state = round(base, 2)
 
 
 # sensor.energy_production_today_SUM
@@ -1111,11 +1522,11 @@ class SfdbEnergyProductionTodaySensor(Entity):
 
     async def async_update(self):
 
-        Sensor1 = float_state(self.hass, "sensor.energy_production_today")
-        Sensor2 = float_state(self.hass, "sensor.energy_production_today_2")
-        Sensor3 = float_state(self.hass, "sensor.energy_production_today_3")
-        Sensor4 = float_state(self.hass, "sensor.energy_production_today_4")
-        Sensor5 = float_state(self.hass, "sensor.energy_production_today_5")
+        Sensor1 = float_state(self.hass, "sensor.energy_production_today_6")
+        Sensor2 = float_state(self.hass, "sensor.energy_production_today_7")
+        Sensor3 = float_state(self.hass, "sensor.energy_production_today_8")
+        Sensor4 = float_state(self.hass, "sensor.energy_production_today_9")
+        Sensor5 = float_state(self.hass, "sensor.energy_production_today_10")
         base = Sensor1 + Sensor2 + Sensor3 + Sensor4 + Sensor5
         if base < 0:
             base = 0
@@ -1137,11 +1548,11 @@ class SfdbEnergyProductionTomorrowSensor(Entity):
 
     async def async_update(self):
 
-        Sensor1 = float_state(self.hass, "sensor.energy_production_tomorrow")
-        Sensor2 = float_state(self.hass, "sensor.energy_production_tomorrow_2")
-        Sensor3 = float_state(self.hass, "sensor.energy_production_tomorrow_3")
-        Sensor4 = float_state(self.hass, "sensor.energy_production_tomorrow_4")
-        Sensor5 = float_state(self.hass, "sensor.energy_production_tomorrow_5")
+        Sensor1 = float_state(self.hass, "sensor.energy_production_tomorrow_6")
+        Sensor2 = float_state(self.hass, "sensor.energy_production_tomorrow_7")
+        Sensor3 = float_state(self.hass, "sensor.energy_production_tomorrow_8")
+        Sensor4 = float_state(self.hass, "sensor.energy_production_tomorrow_9")
+        Sensor5 = float_state(self.hass, "sensor.energy_production_tomorrow_10")
         base = Sensor1 + Sensor2 + Sensor3 + Sensor4 + Sensor5
         if base < 0:
             base = 0
@@ -1235,68 +1646,20 @@ class SfdbEnergyProductionTodayRemainingSUMDifSensor(Entity):
 # (7a) Today Forecast-Klasse => parametrisierte is_z
 # ------------------------------------------------------------------------------
 
-
-class SfdbEnergyForecastSensor02hToday(Entity):
-
-    def __init__(self, hass):
+class SfdbEnergyForecastSensorToday(Entity):
+    """
+    Ersetzt z.B. SfdbEnergy02hSUMZSensor & SfdbEnergy02hSUMSensor.
+    hourtoday => 2,3,4,6,9,12
+    is_z => True => _SUM_z, False => _SUM
+    """
+    def __init__(self, hass: HomeAssistant, hourtoday: int, is_z: bool):
         self.hass = hass
-        self._attr_name = "sfdb_energy_02h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_02h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_today")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_today_remaining_sum")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
+        self.hourtoday = hourtoday
+        self.is_z = is_z
+        if is_z:
+            self._attr_name = f"sfdb_energy_{hourtoday:02d}h_SUM_z"
         else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor03hToday(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_03h_SUM"
+            self._attr_name = f"sfdb_energy_{hourtoday:02d}h_SUM"
         self._state = None
 
     @property
@@ -1310,11 +1673,10 @@ class SfdbEnergyForecastSensor03hToday(Entity):
     async def async_update(self):
         # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
         # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_03h")
+        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_{self.hourtoday:02d}h")
 
         t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
         t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_today")
         t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
         t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
 
@@ -1331,7 +1693,7 @@ class SfdbEnergyForecastSensor03hToday(Entity):
             if tX < t3:
                 val = prod_remain * red04
             else:
-                if tX < t0:
+                if tX < 24:
                     val = prod_remain * red03
                 else:
                     if tX < t2:
@@ -1345,231 +1707,17 @@ class SfdbEnergyForecastSensor03hToday(Entity):
                             else:
                                 val = 0
 
-        self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor04hToday(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_04h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_04h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_today")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_today_remaining_sum")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
+        # is_z => _SUM_z, is_z=False => _SUM
+        # Falls du speziell unterscheiden willst:
+        if self.is_z:
+            # z-Variante => z.B. Code, der in "SfdbEnergyXXhSUMZSensor" stand
+            pass
         else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
+            # SUM => Code, der in "SfdbEnergyXXhSUMSensor" stand (z.B. clamp negative to 0, etc.)
+            pass
 
         self._state = round(val, 1)
 
-
-class SfdbEnergyForecastSensor06hToday(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_06h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_06h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_today")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_today_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
-        else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor09hToday(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_09h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_09h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_today")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_today_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
-        else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor12hToday(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_12h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_12h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_today")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_today_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
-        else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
 
 
 # ------------------------------------------------------------------------------
@@ -1577,11 +1725,20 @@ class SfdbEnergyForecastSensor12hToday(Entity):
 # ------------------------------------------------------------------------------
 
 
-class SfdbEnergyForecastSensor15hTomorrow(Entity):
-
-    def __init__(self, hass):
+class SfdbEnergyForecastSensorTomorrow(Entity):
+    """
+    Ersetzt z.B. SfdbEnergy02hSUMZSensor & SfdbEnergy02hSUMSensor.
+    hourtomorrow => 15,18,21,24,27,30,33,36
+    is_z => True => _SUM_z, False => _SUM
+    """
+    def __init__(self, hass: HomeAssistant, hourtomorrow: int, is_z: bool):
         self.hass = hass
-        self._attr_name = "sfdb_energy_15h_SUM"
+        self.hourtomorrow = hourtomorrow
+        self.is_z = is_z
+        if is_z:
+            self._attr_name = f"sfdb_energy_{hourtomorrow:02d}h_SUM_z"
+        else:
+            self._attr_name = f"sfdb_energy_{hourtomorrow:02d}h_SUM"
         self._state = None
 
     @property
@@ -1595,11 +1752,10 @@ class SfdbEnergyForecastSensor15hTomorrow(Entity):
     async def async_update(self):
         # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
         # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_15h")
+        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_{self.hourtomorrow:02d}h")
 
         t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
         t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
         t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
         t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
 
@@ -1616,7 +1772,7 @@ class SfdbEnergyForecastSensor15hTomorrow(Entity):
             if tX < t3:
                 val = prod_remain * red04
             else:
-                if tX < t0:
+                if tX < 24:
                     val = prod_remain * red03
                 else:
                     if tX < t2:
@@ -1630,411 +1786,36 @@ class SfdbEnergyForecastSensor15hTomorrow(Entity):
                             else:
                                 val = 0
 
-        self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor18hTomorrow(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_18h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_18h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_tomorrow_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
+        # is_z => _SUM_z, is_z=False => _SUM
+        # Falls du speziell unterscheiden willst:
+        if self.is_z:
+            # z-Variante => z.B. Code, der in "SfdbEnergyXXhSUMZSensor" stand
+            pass
         else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
+            # SUM => Code, der in "SfdbEnergyXXhSUMSensor" stand (z.B. clamp negative to 0, etc.)
+            pass
 
         self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor21hTomorrow(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_21h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_21h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_tomorrow_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
-        else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor24hTomorrow(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_24h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_24h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_tomorrow_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
-        else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor27hTomorrow(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_27h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_03h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_tomorrow_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
-        else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor30hTomorrow(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_30h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_06h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_tomorrow_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
-        else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor33hTomorrow(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_33h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_09h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_tomorrow_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
-        else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor36hTomorrow(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_36h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_12h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_tomorrow_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
-        else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
-
 
 
 # ------------------------------------------------------------------------------
 # (7c) D2 Forecast-Klasse => parametrisierte is_z
 # ------------------------------------------------------------------------------
 
-class SfdbEnergyForecastSensor39hD2(Entity):
-
-    def __init__(self, hass):
+class SfdbEnergyForecastSensorD2(Entity):
+    """
+    Ersetzt z.B. SfdbEnergy02hSUMZSensor & SfdbEnergy02hSUMSensor.
+    hourd2 => 39,42,45,48,51,54,57,60
+    is_z => True => _SUM_z, False => _SUM
+    """
+    def __init__(self, hass: HomeAssistant, hourd2: int, is_z: bool):
         self.hass = hass
-        self._attr_name = "sfdb_energy_39h_SUM"
+        self.hourd2= hourd2
+        self.is_z = is_z
+        if is_z:
+            self._attr_name = f"sfdb_energy_{hourd2:02d}h_SUM_z"
+        else:
+            self._attr_name = f"sfdb_energy_{hourd2:02d}h_SUM"
         self._state = None
 
     @property
@@ -2048,11 +1829,10 @@ class SfdbEnergyForecastSensor39hD2(Entity):
     async def async_update(self):
         # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
         # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_15h")
+        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_{self.hourd2:02d}h")
 
         t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
         t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
         t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
         t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
 
@@ -2069,7 +1849,7 @@ class SfdbEnergyForecastSensor39hD2(Entity):
             if tX < t3:
                 val = prod_remain * red04
             else:
-                if tX < t0:
+                if tX < 24:
                     val = prod_remain * red03
                 else:
                     if tX < t2:
@@ -2083,401 +1863,16 @@ class SfdbEnergyForecastSensor39hD2(Entity):
                             else:
                                 val = 0
 
-        self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor42hD2(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_42h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_18h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_d2_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
+        # is_z => _SUM_z, is_z=False => _SUM
+        # Falls du speziell unterscheiden willst:
+        if self.is_z:
+            # z-Variante => z.B. Code, der in "SfdbEnergyXXhSUMZSensor" stand
+            pass
         else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
+            # SUM => Code, der in "SfdbEnergyXXhSUMSensor" stand (z.B. clamp negative to 0, etc.)
+            pass
 
         self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor45hD2(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_45h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_21h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_d2_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
-        else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
-
-
-
-class SfdbEnergyForecastSensor48hD2(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_48h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_24h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_d2_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
-        else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor51hD2(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_51h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_03h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_d2_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
-        else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor54hD2(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_54h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_06h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_d2_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
-        else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor57hD2(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_57h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_09h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_d2_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
-        else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor60hD2(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_60h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_12h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_d2_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
-        else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
-
 
 
 
@@ -2485,11 +1880,21 @@ class SfdbEnergyForecastSensor60hD2(Entity):
 # (7d) D3 Forecast-Klasse => parametrisierte is_z
 # ------------------------------------------------------------------------------
 
-class SfdbEnergyForecastSensor63hD3(Entity):
 
-    def __init__(self, hass):
+class SfdbEnergyForecastSensorD3(Entity):
+    """
+    Ersetzt z.B. SfdbEnergy02hSUMZSensor & SfdbEnergy02hSUMSensor.
+    hourd3 => 63,66,69,72,75,78
+    is_z => True => _SUM_z, False => _SUM
+    """
+    def __init__(self, hass: HomeAssistant, hourd3: int, is_z: bool):
         self.hass = hass
-        self._attr_name = "sfdb_energy_63h_SUM"
+        self.hourd3= hourd3
+        self.is_z = is_z
+        if is_z:
+            self._attr_name = f"sfdb_energy_{hourd3:02d}h_SUM_z"
+        else:
+            self._attr_name = f"sfdb_energy_{hourd3:02d}h_SUM"
         self._state = None
 
     @property
@@ -2503,11 +1908,10 @@ class SfdbEnergyForecastSensor63hD3(Entity):
     async def async_update(self):
         # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
         # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_15h")
+        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_{self.hourd3:02d}h")
 
         t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
         t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
         t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
         t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
 
@@ -2524,7 +1928,7 @@ class SfdbEnergyForecastSensor63hD3(Entity):
             if tX < t3:
                 val = prod_remain * red04
             else:
-                if tX < t0:
+                if tX < 24:
                     val = prod_remain * red03
                 else:
                     if tX < t2:
@@ -2538,398 +1942,14 @@ class SfdbEnergyForecastSensor63hD3(Entity):
                             else:
                                 val = 0
 
-        self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor66hD3(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_66h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_18h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_d3_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
+        # is_z => _SUM_z, is_z=False => _SUM
+        # Falls du speziell unterscheiden willst:
+        if self.is_z:
+            # z-Variante => z.B. Code, der in "SfdbEnergyXXhSUMZSensor" stand
+            pass
         else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
-
-
-
-class SfdbEnergyForecastSensor69hD3(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_69h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_21h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_d3_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
-        else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor72hD3(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_72h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_24h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_d3_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
-        else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor75hD3(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_75h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_03h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_tomorrow_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
-        else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor78hD3(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_78h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_06h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_tomorrow_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
-        else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor81hD3(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_81h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_09h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_tomorrow_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
-        else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
-
-        self._state = round(val, 1)
-
-
-class SfdbEnergyForecastSensor84hD3(Entity):
-
-    def __init__(self, hass):
-        self.hass = hass
-        self._attr_name = "sfdb_energy_84h_SUM"
-        self._state = None
-
-    @property
-    def name(self):
-        return self._attr_name
-
-    @property
-    def state(self):
-        return self._state
-
-    async def async_update(self):
-        # Die Forecast-Logik, die in den alten _z und _SUM-Klassen stand:
-        # Ein Beispiel (du kannst den Code anpassen):
-        tX = float_state(self.hass, f"sensor.sfdb_energy_timedif_12h")
-
-        t4 = float_state(self.hass, "sensor.sfdb_energy_timedif_4")
-        t3 = float_state(self.hass, "sensor.sfdb_energy_timedif_3")
-        t0 = float_state(self.hass, "sensor.sfdb_energy_timedif_tomorrow")
-        t2 = float_state(self.hass, "sensor.sfdb_energy_timedif_2")
-        t1 = float_state(self.hass, "sensor.sfdb_energy_timedif_1")
-
-        prod_remain = float_state(self.hass, "sensor.sfdb_energy_production_tomorrow_SUM")
-        red04 = float_state(self.hass, "sensor.sfdb_energy_reduziert_04_sum")
-        red03 = float_state(self.hass, "sensor.sfdb_energy_reduziert_03_sum")
-        red02 = float_state(self.hass, "sensor.sfdb_energy_reduziert_02_sum")
-        red01 = float_state(self.hass, "sensor.sfdb_energy_reduziert_01_sum")
-
-        # Vereinfacht: Dieselbe Abfrage wie in "SfdbEnergy2hSUMZSensor" usw.
-        if tX < t4:
-            val = 0
-        else:
-            if tX < t3:
-                val = prod_remain * red04
-            else:
-                if tX < t0:
-                    val = prod_remain * red03
-                else:
-                    if tX < t2:
-                        val = prod_remain * red02
-                    else:
-                        if tX < t1:
-                            val = prod_remain * red01
-                        else:
-                            if tX > t1:
-                                val = 0
-                            else:
-                                val = 0
+            # SUM => Code, der in "SfdbEnergyXXhSUMSensor" stand (z.B. clamp negative to 0, etc.)
+            pass
 
         self._state = round(val, 1)
 

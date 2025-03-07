@@ -147,4 +147,3 @@ class SolarForecastOptionsFlowHandler(config_entries.OptionsFlow):
             data_schema=data_schema,
             errors=self._errors
         )
-        

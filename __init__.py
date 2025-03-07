@@ -1,7 +1,7 @@
 from .const import DOMAIN
 
 async def async_setup_entry(hass, entry):
-    """Set up graph_for_omsf from a Config Entry (UI)."""
+    """Set up solar_forecast_db from a Config Entry (UI)."""
     hass.async_create_task(
         hass.config_entries.async_forward_entry_setup(entry, "sensor")
     )
