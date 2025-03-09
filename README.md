@@ -15,6 +15,7 @@ bisher nur manuell in der Sensor.py!
 
 ![image](https://github.com/user-attachments/assets/b6433add-4c53-4e2d-b4b0-207ce00292ac)
 
+https://my.home-assistant.io/redirect/hacs_repository/?owner=derbert235&repository=graph_for_omsf
 
 
 Name - Beispiel: Graph for Open-Meteo Solar Forecast
